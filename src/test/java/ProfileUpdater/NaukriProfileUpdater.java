@@ -36,7 +36,7 @@ public class NaukriProfileUpdater {
         // Clear and update headline
         By headlineBox = By.cssSelector("#resumeHeadlineTxt");
         driver.findElement(headlineBox).clear();
-        driver.findElement(headlineBox).sendKeys("Senior QA Engineer | Manual & Automation Testing: Selenium, Cypress, Appium, Rest Assured | TestNG, BDD, Cucumber | API, DB, Performance Testing | JIRA, Postman, JMeter, GitHub | CI/CD: Jenkins | SQL at 12.30 am");
+        driver.findElement(headlineBox).sendKeys("Senior QA Engineer | Manual & Automation Testing: Selenium, Cypress, Appium, Rest Assured | TestNG, BDD, Cucumber | API, DB, Performance Testing | JIRA, Postman, JMeter, GitHub | CI/CD: Jenkins | SQL at 7 am");
 
         // Click Save
         driver.findElement(By.cssSelector("div[class='action s12'] button[type='submit']")).click();
