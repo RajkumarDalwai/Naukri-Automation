@@ -49,21 +49,21 @@ public class NaukriProfileUpdater {
         Thread.sleep(5000);
 
         // Navigate to profile
-        driver.findElement(By.cssSelector("div[class='view-profile-wrapper'] a")).click();
+        driver.findElement(By.xpath("//a[normalize-space()='View profile']")).click();
 
         // Wait for profile to load
         Thread.sleep(5000);
 
         // Click edit on Resume Headline
-        driver.findElement(By.cssSelector("div[class='card mt15'] div span[class='edit icon']")).click();
+        driver.findElement(By.xpath("//div[@class='widgetHead']//span[@class='edit icon'][normalize-space()='editOneTheme']")).click();
 
         // Clear and update headline
-        By headlineBox = By.cssSelector("#resumeHeadlineTxt");
+        By headlineBox = By.xpath("//textarea[@id='resumeHeadlineTxt']");
         driver.findElement(headlineBox).clear();
         driver.findElement(headlineBox).sendKeys("Senior QA Engineer | Manual & Automation Testing: Selenium, Cypress, Appium, Rest Assured | TestNG, BDD, Cucumber | API, DB, Performance Testing | JIRA, Postman, JMeter, GitHub | CI/CD: Jenkins | SQL with github actions");
 
         // Click Save
-        driver.findElement(By.cssSelector("div[class='action s12'] button[type='submit']")).click();
+        driver.findElement(By.xpath("//button[normalize-space()='Save']")).click();
     }
 
     @AfterMethod
