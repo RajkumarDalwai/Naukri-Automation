@@ -19,18 +19,17 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
 
-      - name: Install Chrome v114
+      - name: Download and install Chrome 114
         run: |
-          sudo apt-get update
-          sudo apt-get install -y wget gnupg curl unzip
-          wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-          echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
-          sudo apt-get update
-          sudo apt-get install -y google-chrome-stable=114.0.5735.90-1
-          google-chrome-stable --version
+          wget https://storage.googleapis.com/chrome-for-testing-public/114.0.5735.90/linux64/chrome-linux64.zip
+          unzip chrome-linux64.zip
+          sudo mv chrome-linux64 /opt/chrome
+          sudo ln -s /opt/chrome/chrome /usr/bin/google-chrome
+          google-chrome --version
 
       - name: Install Chrome dependencies
         run: |
+          sudo apt-get update
           sudo apt-get install -y \
             libnss3 \
             libxss1 \
@@ -39,11 +38,11 @@ jobs:
             libgtk-3-0 \
             libgbm1
 
-      - name: Install ChromeDriver v114.0.5735.90
+      - name: Install matching ChromeDriver 114
         run: |
-          wget -q -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip
-          unzip /tmp/chromedriver.zip -d /tmp
-          sudo mv /tmp/chromedriver /usr/local/bin/chromedriver
+          wget https://storage.googleapis.com/chrome-for-testing-public/114.0.5735.90/linux64/chromedriver-linux64.zip
+          unzip chromedriver-linux64.zip
+          sudo mv chromedriver-linux64/chromedriver /usr/local/bin/
           sudo chmod +x /usr/local/bin/chromedriver
           chromedriver --version
 
