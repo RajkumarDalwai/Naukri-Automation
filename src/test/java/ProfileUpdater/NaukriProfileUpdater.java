@@ -46,13 +46,13 @@ public class NaukriProfileUpdater {
         driver.findElement(By.xpath("//button[text()='Login']")).click();
 
         // Wait for navigation
-        Thread.sleep(5000);
+        Thread.sleep(6000);
 
         // Navigate to profile
         driver.findElement(By.xpath("//a[normalize-space()='View profile']")).click();
 
         // Wait for profile to load
-        Thread.sleep(5000);
+        Thread.sleep(6000);
 
         // Click edit on Resume Headline
         driver.findElement(By.xpath("//div[@class='widgetHead']//span[@class='edit icon'][normalize-space()='editOneTheme']")).click();
