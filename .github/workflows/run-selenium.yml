@@ -1,11 +1,8 @@
 name: Run Selenium Tests Daily
 
 on:
-  # Schedule: Every day at 1:30 AM UTC => 7:00 AM IST
   schedule:
-    - cron: '30 1 * * *'
-
-  # Enables the "Run workflow" button in the Actions tab
+    - cron: '30 1 * * *'  # Every day at 1:30 AM UTC (7:00 AM IST)
   workflow_dispatch:
 
 jobs:
@@ -20,16 +17,20 @@ jobs:
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
-          java-version: '21'  # or change to '11' if your project needs it
+          java-version: '21'
 
-      - name: Install Chrome
+      - name: Install Google Chrome
         run: |
+          sudo apt-get update
+          sudo apt-get install -y wget gnupg
+          wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+          echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
 
-      - name: Install required dependencies for Chrome
+      - name: Install Chrome dependencies
         run: |
-          sudo apt-get install -y libnss3 libxss1 libappindicator1 libindicator7 libgbm1
+          sudo apt-get install -y libnss3 libxss1 libasound2 libatk-bridge2.0-0 libgtk-3-0 libgbm1
 
       - name: Set up ChromeDriver
         uses: nanasess/setup-chromedriver@v2
