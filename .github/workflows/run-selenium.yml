@@ -24,6 +24,8 @@ jobs:
           wget https://storage.googleapis.com/chrome-for-testing-public/114.0.5735.90/linux64/chrome-linux64.zip
           unzip chrome-linux64.zip
           sudo mv chrome-linux64 /opt/chrome
+          # Remove existing symlink if it exists to avoid error
+          sudo rm -f /usr/bin/google-chrome
           sudo ln -s /opt/chrome/chrome /usr/bin/google-chrome
           google-chrome --version
 
@@ -33,7 +35,7 @@ jobs:
           sudo apt-get install -y \
             libnss3 \
             libxss1 \
-            libasound2t64 \
+            libasound2 \
             libatk-bridge2.0-0 \
             libgtk-3-0 \
             libgbm1
