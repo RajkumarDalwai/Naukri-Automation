@@ -20,7 +20,26 @@ jobs:
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
-          java-version: '21'  # Or '11', based on your project
+          java-version: '21'  # or change to '11' if your project needs it
 
-      - name: Build with Maven
+      - name: Install Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+
+      - name: Install required dependencies for Chrome
+        run: |
+          sudo apt-get install -y libnss3 libxss1 libappindicator1 libindicator7 libgbm1
+
+      - name: Set up ChromeDriver
+        uses: nanasess/setup-chromedriver@v2
+        with:
+          chromedriver-version: 'latest'
+
+      - name: Verify Chrome and ChromeDriver versions
+        run: |
+          google-chrome-stable --version
+          chromedriver --version
+
+      - name: Run Maven Tests
         run: mvn clean test
