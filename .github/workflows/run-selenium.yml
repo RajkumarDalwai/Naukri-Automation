@@ -19,15 +19,14 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
 
-      - name: Install Google Chrome (v135)
+      - name: Install Chrome v114
         run: |
           sudo apt-get update
           sudo apt-get install -y wget gnupg curl unzip
           wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
           echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
           sudo apt-get update
-          # Install specific version of Chrome (v135)
-          sudo apt-get install -y google-chrome-stable=135.0.4167.0-1 || true
+          sudo apt-get install -y google-chrome-stable=114.0.5735.90-1
           google-chrome-stable --version
 
       - name: Install Chrome dependencies
@@ -40,11 +39,9 @@ jobs:
             libgtk-3-0 \
             libgbm1
 
-      - name: Install matching ChromeDriver (v135)
+      - name: Install ChromeDriver v114.0.5735.90
         run: |
-          DRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_135")
-          echo "Using ChromeDriver version: $DRIVER_VERSION"
-          wget -q -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/$DRIVER_VERSION/chromedriver_linux64.zip
+          wget -q -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip
           unzip /tmp/chromedriver.zip -d /tmp
           sudo mv /tmp/chromedriver /usr/local/bin/chromedriver
           sudo chmod +x /usr/local/bin/chromedriver
