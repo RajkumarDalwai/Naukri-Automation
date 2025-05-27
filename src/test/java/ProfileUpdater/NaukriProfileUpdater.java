@@ -15,6 +15,7 @@ import org.testng.annotations.Test;
 
 public class NaukriProfileUpdater {
     private WebDriver driver;
+    private WebDriverWait wait;
 
     @BeforeMethod
     public void setUp() {
@@ -26,44 +27,42 @@ public class NaukriProfileUpdater {
 
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0)); // Set to 0 to rely on explicit waits only
+        wait = new WebDriverWait(driver, Duration.ofSeconds(20));
     }
 
     @Test
-    public void testUpdateProfileHeadline() throws InterruptedException {
+    public void testUpdateProfileHeadline() {
         driver.get("https://www.naukri.com/nlogin/login");
 
-        // Use explicit wait for username field
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        WebElement usernameField = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='usernameField']")));
+        // Wait and fill username
+        WebElement usernameField = wait.until(ExpectedConditions.elementToBeClickable(By.id("usernameField")));
         usernameField.sendKeys("dalwairajkumar22@gmail.com");
 
-        // Password field
-        WebElement passwordField = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='passwordField']")));
+        // Wait and fill password
+        WebElement passwordField = wait.until(ExpectedConditions.elementToBeClickable(By.id("passwordField")));
         passwordField.sendKeys("98608663140");
 
-        // Login button
-        driver.findElement(By.xpath("//button[text()='Login']")).click();
+        // Click login button
+        WebElement loginButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='Login']")));
+        loginButton.click();
 
-        // Wait for navigation
-        Thread.sleep(6000);
+        // Wait until "View profile" link is visible and clickable
+        WebElement viewProfileLink = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[normalize-space()='View profile']")));
+        viewProfileLink.click();
 
-        // Navigate to profile
-        driver.findElement(By.xpath("//a[normalize-space()='View profile']")).click();
+        // Wait until Edit icon is clickable
+        WebElement editIcon = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='widgetHead']//span[contains(@class,'edit') and normalize-space()='editOneTheme']")));
+        editIcon.click();
 
-        // Wait for profile to load
-        Thread.sleep(6000);
+        // Wait for headline textarea to be visible
+        WebElement headlineBox = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("resumeHeadlineTxt")));
+        headlineBox.clear();
+        headlineBox.sendKeys("Senior QA Engineer | Manual & Automation Testing: Selenium, Cypress, Appium, Rest Assured | TestNG, BDD, Cucumber | API, DB, Performance Testing | JIRA, Postman, JMeter, GitHub | CI/CD: Jenkins | SQL with github actions");
 
-        // Click edit on Resume Headline
-        driver.findElement(By.xpath("//div[@class='widgetHead']//span[@class='edit icon'][normalize-space()='editOneTheme']")).click();
-
-        // Clear and update headline
-        By headlineBox = By.xpath("//textarea[@id='resumeHeadlineTxt']");
-        driver.findElement(headlineBox).clear();
-        driver.findElement(headlineBox).sendKeys("Senior QA Engineer | Manual & Automation Testing: Selenium, Cypress, Appium, Rest Assured | TestNG, BDD, Cucumber | API, DB, Performance Testing | JIRA, Postman, JMeter, GitHub | CI/CD: Jenkins | SQL with github actions");
-
-        // Click Save
-        driver.findElement(By.xpath("//button[normalize-space()='Save']")).click();
+        // Wait and click Save button
+        WebElement saveButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[normalize-space()='Save']")));
+        saveButton.click();
     }
 
     @AfterMethod
