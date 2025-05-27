@@ -71,7 +71,7 @@ public class NaukriProfileUpdater {
         By headlineBox = By.id("resumeHeadlineTxt");
         WebElement headlineTextArea = wait.until(ExpectedConditions.visibilityOfElementLocated(headlineBox));
         headlineTextArea.clear();
-        headlineTextArea.sendKeys("Senior QA Engineer | Manual & Automation Testing: Selenium, Cypress, Appium, Rest Assured | TestNG, BDD, Cucumber | API, DB, Performance Testing | JIRA, Postman, JMeter, GitHub | CI/CD: Jenkins | SQL with github actions");
+        headlineTextArea.sendKeys("Senior QA Engineer | Manual & Automation Testing: Selenium, Cypress, Appium, Rest Assured | TestNG, BDD, Cucumber | API, DB, Performance Testing | JIRA, Postman, JMeter, GitHub | CI/CD: Jenkins | SQL.");
 
         // Click Save
         WebElement saveBtn = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[normalize-space()='Save']")));
