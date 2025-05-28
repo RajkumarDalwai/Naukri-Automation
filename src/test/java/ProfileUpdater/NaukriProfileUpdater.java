@@ -10,13 +10,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -27,10 +23,10 @@ public class NaukriProfileUpdater {
     @BeforeMethod
     public void setUp() {
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless", "--no-sandbox", "--disable-dev-shm-usage");
-        options.addArguments("--disable-blink-features=AutomationControlled");
-        options.addArguments("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) " +
-                             "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36");
+//        options.addArguments("--headless", "--no-sandbox", "--disable-dev-shm-usage");
+//        options.addArguments("--disable-blink-features=AutomationControlled");
+//        options.addArguments("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) " +
+//                             "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36");
 
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
@@ -40,9 +36,13 @@ public class NaukriProfileUpdater {
 
     @Test
     public void testUpdateProfileHeadline() throws InterruptedException {
-        driver.get("https://www.naukri.com/nlogin/login");
+//        driver.get("https://www.naukri.com/nlogin/login");
+    	
+    	  driver.get("https://www.naukri.com/");
+    	  
+    	  driver.findElement(By.cssSelector("#login_Layer")).click();
 
-        // Login username
+     /*   // Login username
         WebElement usernameField = wait.until(ExpectedConditions.elementToBeClickable(By.id("usernameField")));
         usernameField.sendKeys("dalwairajkumar22@gmail.com");
 
@@ -91,7 +91,7 @@ public class NaukriProfileUpdater {
 
         if (driver != null) {
             driver.quit();
-        }
+        }*/
     }
 
     // Screenshot helper method
