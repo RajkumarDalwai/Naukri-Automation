@@ -2,8 +2,8 @@ name: Run Selenium Tests
 
 on:
   schedule:
-    - cron: '30 1 * * *' 
-  workflow_dispatch:     
+    - cron: '30 1 * * *'
+  workflow_dispatch:
 
 jobs:
   run-tests:
@@ -19,15 +19,18 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
 
-      - name: Run Selenium tests
-        run: |
-          echo "Your Selenium test commands go here"
-          
+      - name: Create screenshots directory
+        run: mkdir -p screenshots
+
       - name: Run Maven Tests
         run: mvn clean test
 
+      - name: List screenshots directory contents
+        if: always()
+        run: ls -la screenshots/
+
       - name: Upload Screenshots
-        if: always() # Run this step even if the test fails
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: test-screenshots
