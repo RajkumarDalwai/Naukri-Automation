@@ -2,20 +2,27 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2025-05-28T06:34:49 IST" name="Default suite" finished-at="2025-05-28T06:35:04 IST" duration-ms="15319">
+  <suite started-at="2025-05-28T06:58:46 IST" name="Default suite" finished-at="2025-05-28T06:59:02 IST" duration-ms="15141">
     <groups>
     </groups>
-    <test started-at="2025-05-28T06:34:49 IST" name="Default test" finished-at="2025-05-28T06:35:04 IST" duration-ms="15319">
+    <test started-at="2025-05-28T06:58:46 IST" name="Default test" finished-at="2025-05-28T06:59:02 IST" duration-ms="15141">
       <class name="ProfileUpdater.NaukriProfileUpdater">
-        <test-method is-config="true" signature="setUp()[pri:0, instance:ProfileUpdater.NaukriProfileUpdater@55141def]" started-at="2025-05-28T06:34:49 IST" name="setUp" finished-at="2025-05-28T06:34:51 IST" duration-ms="2185" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:ProfileUpdater.NaukriProfileUpdater@3270d194]" started-at="2025-05-28T06:58:46 IST" name="setUp" finished-at="2025-05-28T06:58:48 IST" duration-ms="1988" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="testUpdateProfileHeadline()[pri:0, instance:ProfileUpdater.NaukriProfileUpdater@55141def]" started-at="2025-05-28T06:34:51 IST" name="testUpdateProfileHeadline" finished-at="2025-05-28T06:35:04 IST" duration-ms="12617" status="PASS">
+        <test-method signature="testUpdateProfileHeadline()[pri:0, instance:ProfileUpdater.NaukriProfileUpdater@3270d194]" started-at="2025-05-28T06:58:48 IST" name="testUpdateProfileHeadline" finished-at="2025-05-28T06:59:01 IST" duration-ms="12797" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testUpdateProfileHeadline -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:ProfileUpdater.NaukriProfileUpdater@55141def]" started-at="2025-05-28T06:35:04 IST" name="tearDown" finished-at="2025-05-28T06:35:04 IST" duration-ms="435" status="PASS">
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:ProfileUpdater.NaukriProfileUpdater@3270d194]" started-at="2025-05-28T06:59:01 IST" name="tearDown" finished-at="2025-05-28T06:59:02 IST" duration-ms="282" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=testUpdateProfileHeadline status=SUCCESS method=NaukriProfileUpdater.testUpdateProfileHeadline()[pri:0, instance:ProfileUpdater.NaukriProfileUpdater@3270d194] output={null}]]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->

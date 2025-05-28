@@ -1,14 +1,21 @@
 package ProfileUpdater;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.time.Duration;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -20,13 +27,13 @@ public class NaukriProfileUpdater {
     @BeforeMethod
     public void setUp() {
         ChromeOptions options = new ChromeOptions();
-        // For debugging, you can comment out headless mode temporarily
-          options.addArguments("--headless", "--no-sandbox", "--disable-dev-shm-usage");
-//        options.addArguments("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36");
+        options.addArguments("--headless", "--no-sandbox", "--disable-dev-shm-usage");
+        options.addArguments("--disable-blink-features=AutomationControlled");
+        options.addArguments("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) " +
+                             "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36");
 
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
-        // Use a reasonable implicit wait
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         wait = new WebDriverWait(driver, Duration.ofSeconds(20));
     }
@@ -59,7 +66,7 @@ public class NaukriProfileUpdater {
         // Wait for profile page to load - can be improved by waiting for a specific element on profile page
         Thread.sleep(5000);
 
-        // Click edit on Resume Headline (adjust the locator if necessary)
+        // Click edit on Resume Headline
         WebElement editIcon = wait.until(ExpectedConditions.elementToBeClickable(
             By.xpath("//div[contains(@class,'widgetHead')]//span[contains(@class,'edit') and contains(text(),'editOneTheme')]")
         ));
@@ -74,13 +81,28 @@ public class NaukriProfileUpdater {
         // Click Save
         WebElement saveBtn = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[normalize-space()='Save']")));
         saveBtn.click();
-
     }
 
     @AfterMethod
-    public void tearDown() {
+    public void tearDown(ITestResult result) {
+        if (result.getStatus() == ITestResult.FAILURE) {
+            takeScreenshot("Failure_" + result.getName() + ".png");
+        }
+
         if (driver != null) {
             driver.quit();
+        }
+    }
+
+    // Screenshot helper method
+    public void takeScreenshot(String fileName) {
+        try {
+            File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+            File destFile = new File("./" + fileName);
+            Files.copy(srcFile.toPath(), destFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            System.out.println("Screenshot saved: " + destFile.getAbsolutePath());
+        } catch (IOException ioe) {
+            System.err.println("Failed to capture screenshot: " + ioe.getMessage());
         }
     }
 }
