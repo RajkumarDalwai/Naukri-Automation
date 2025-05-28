@@ -21,10 +21,10 @@ public class NaukriProfileUpdater {
     public void setUp() {
         ChromeOptions options = new ChromeOptions();
         // For debugging, you can comment out headless mode temporarily
-        options.addArguments("--headless=new");  
-        options.addArguments("--no-sandbox");
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36");
+//        options.addArguments("--headless=new");  
+//        options.addArguments("--no-sandbox");
+//        options.addArguments("--disable-dev-shm-usage");
+//        options.addArguments("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36");
 
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
