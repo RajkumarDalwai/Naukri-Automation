@@ -59,11 +59,8 @@ public class NaukriProfileUpdater {
         // Click login
         driver.findElement(By.xpath("//button[text()='Login']")).click();
 
-        // Wait until URL changes away from login page or some element appears indicating successful login
-        wait.until(ExpectedConditions.not(ExpectedConditions.urlContains("/nlogin")));
-
         // Wait for and click 'View profile' link using updated locator
-        By profileLink = By.xpath("//div[@class='view-profile-wrapper']/a[normalize-space()='View profile']");
+        By profileLink = By.xpath("//a[normalize-space()='View profile']");
         System.out.println("Waiting for 'View profile' link...");
         WebElement profile = wait.until(ExpectedConditions.elementToBeClickable(profileLink));
         System.out.println("'View profile' link found and clickable");
