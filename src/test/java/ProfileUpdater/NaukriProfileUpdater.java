@@ -21,10 +21,10 @@ public class NaukriProfileUpdater {
     public void setUp() {
         ChromeOptions options = new ChromeOptions();
         // For debugging, you can comment out headless mode temporarily
-        options.addArguments("--headless=new");  
-        options.addArguments("--no-sandbox");
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36");
+//        options.addArguments("--headless=new");  
+//        options.addArguments("--no-sandbox");
+//        options.addArguments("--disable-dev-shm-usage");
+//        options.addArguments("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36");
 
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
@@ -43,7 +43,7 @@ public class NaukriProfileUpdater {
 
         // Login password
         WebElement passwordField = wait.until(ExpectedConditions.elementToBeClickable(By.id("passwordField")));
-        passwordField.sendKeys("98608663140");
+        passwordField.sendKeys("Rajkumar@25");
 
         // Click login
         driver.findElement(By.xpath("//button[text()='Login']")).click();
